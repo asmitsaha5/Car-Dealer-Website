@@ -17,7 +17,7 @@ const carsData = [
     engine: "Dual Motor",
     horsepower: 358,
     topSpeed: 201,
-    image: "https://drive.google.com/file/d/1iRjLAy1UIfSyVZtoAuiugRJtLuSMUFK5/view?usp=drive_link",
+    image: "assets/images/cars/Tesla.jpeg",
     description: "Sleek and efficient electric sedan with advanced autopilot features. Perfect for daily commuting and long-distance travel.",
     features: [
       "Autopilot",
@@ -48,7 +48,7 @@ const carsData = [
     engine: "3.0L Twin-Turbo",
     horsepower: 335,
     topSpeed: 209,
-    image: "https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=400&fit=crop",
+    image: "assets/images/cars/bmw.jpg",
     description: "Luxury SUV with premium interior, advanced technology, and powerful performance. Ideal for families and off-road adventures.",
     features: [
       "iDrive System",
@@ -79,7 +79,7 @@ const carsData = [
     engine: "2.0L",
     horsepower: 158,
     topSpeed: 180,
-    image: "https://images.unsplash.com/photo-1566023967268-de94b84e5481?w=600&h=400&fit=crop",
+    image: "assets/images/cars/honda.jpeg",
     description: "Reliable and fuel-efficient sedan with modern features and safety technology. Perfect for first-time buyers.",
     features: [
       "Honda Sensing",
@@ -110,7 +110,7 @@ const carsData = [
     engine: "2.0L TFSI",
     horsepower: 261,
     topSpeed: 209,
-    image: "https://images.unsplash.com/photo-1589345085963-8cda77202eef?w=600&h=400&fit=crop",
+    image: "assets/images/cars/Audi.avif",
     description: "German engineering at its finest. Premium sedan with excellent handling and luxury features.",
     features: [
       "MMI Navigation",
@@ -141,7 +141,7 @@ const carsData = [
     engine: "2.5L Hybrid",
     horsepower: 208,
     topSpeed: 180,
-    image: "https://images.unsplash.com/photo-1567814539186-54a088a0b1d5?w=600&h=400&fit=crop",
+    image: "assets/images/cars/toyota.jpeg",
     description: "Fuel-efficient hybrid sedan with Toyota reliability. Great for eco-conscious drivers.",
     features: [
       "Hybrid System",
@@ -172,7 +172,7 @@ const carsData = [
     engine: "1.5L TSI",
     horsepower: 130,
     topSpeed: 200,
-    image: "https://images.unsplash.com/photo-1535732066927-ab7c9ab60908?w=600&h=400&fit=crop",
+    image: "assets/images/cars/vw.jpeg",
     description: "Classic hatchback with modern technology. Nimble and fun to drive in urban environments.",
     features: [
       "MIB3 Infotainment",
@@ -203,7 +203,7 @@ const carsData = [
     engine: "3.7L V6",
     horsepower: 290,
     topSpeed: 217,
-    image: "https://images.unsplash.com/photo-1547744152-48ac3b6afb10?w=600&h=400&fit=crop",
+    image: "assets/images/cars/ford.jpeg",
     description: "American muscle car with iconic styling and thrilling performance.",
     features: [
       "Performance Package",
@@ -234,7 +234,7 @@ const carsData = [
     engine: "2.5L",
     horsepower: 187,
     topSpeed: 193,
-    image: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600&h=400&fit=crop",
+    image: "assets/images/cars/mazda.png",
     description: "Compact SUV combining style, comfort, and reliability. Perfect for adventure seekers.",
     features: [
       "i-Activsense",
