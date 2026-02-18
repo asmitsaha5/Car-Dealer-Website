@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Cars - AutoHub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Browse Cars</h1>
+      <p>Find your perfect vehicle from thousands of quality options</p>
+    </div>
+  </section>
+
+  <main class="container main-content">
+    <div class="cars-container">
+      <!-- Filters Sidebar -->
+      <aside class="filters-sidebar">
+        <div class="filters-header">
+          <h2>Filters</h2>
+          <button class="btn-reset-filters" onclick="resetFilters()">Reset All</button>
+        </div>
+
+        <!-- Price Range Filter -->
+        <div class="filter-group">
+          <h3>Price Range</h3>
+          <div class="price-inputs">
+            <input type="number" id="minPrice" placeholder="Min" class="filter-input price-input" value="0">
+            <span>-</span>
+            <input type="number" id="maxPrice" placeholder="Max" class="filter-input price-input" value="6000000">
+          </div>
+        </div>
+
+        <!-- Brand Filter -->
+        <div class="filter-group">
+          <h3>Brand</h3>
+          <select id="brandFilter" class="form-select filter-select">
+            <option value="">All Brands</option>
+            <option value="Tesla">Tesla</option>
+            <option value="BMW">BMW</option>
+            <option value="Honda">Honda</option>
+            <option value="Audi">Audi</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Volkswagen">Volkswagen</option>
+            <option value="Ford">Ford</option>
+            <option value="Mazda">Mazda</option>
+          </select>
+        </div>
+
+        <!-- Fuel Type Filter -->
+        <div class="filter-group">
+          <h3>Fuel Type</h3>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" class="fuel-filter" value="Petrol">
+              <span>Petrol</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" class="fuel-filter" value="Diesel">
+              <span>Diesel</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" class="fuel-filter" value="Hybrid">
+              <span>Hybrid</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" class="fuel-filter" value="Electric">
+              <span>Electric</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Transmission Filter -->
+        <div class="filter-group">
+          <h3>Transmission</h3>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" class="transmission-filter" value="Manual">
+              <span>Manual</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" class="transmission-filter" value="Automatic">
+              <span>Automatic</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" class="transmission-filter" value="CVT">
+              <span>CVT</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Mileage Filter -->
+        <div class="filter-group">
+          <h3>Mileage</h3>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" class="mileage-filter" value="0-20000">
+              <span>Under 20K km</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" class="mileage-filter" value="20000-50000">
+              <span>20K - 50K km</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" class="mileage-filter" value="50000-100000">
+              <span>50K - 100K km</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" class="mileage-filter" value="100000+">
+              <span>Over 100K km</span>
+            </label>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <section class="cars-main">
+        <!-- Search and Sort -->
+        <div class="cars-header">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search by brand, model, or location..."
+              class="search-input">
+          </div>
+          <select id="sortSelect" class="form-select sort-select">
+            <option value="latest">Latest First</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="mileage-low">Lowest Mileage</option>
+          </select>
+        </div>
+
+        <!-- Results Count -->
+        <div class="results-info">
+          <p>Showing <span id="resultsCount">0</span> vehicles</p>
+        </div>
+
+        <!-- Cars Grid -->
+        <div class="cars-grid" id="carsGrid">
+          <!-- Cars will be loaded here -->
+        </div>
+
+        <!-- No Results Message -->
+        <div class="no-results" id="noResults" style="display: none;">
+          <p>No cars found matching your criteria. Try adjusting your filters.</p>
+          <button class="btn btn-primary" onclick="resetFilters()">Reset Filters</button>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+          <!-- Pagination will be loaded here -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cars.js"></script>
+</body>
+
+</html>

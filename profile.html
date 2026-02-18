@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - AutoHub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>My Profile</h1>
+      <p>Manage your account and listings</p>
+    </div>
+  </section>
+
+  <main class="container profile-container">
+    <div class="profile-grid">
+      <!-- Sidebar -->
+      <aside class="profile-sidebar">
+        <div class="profile-card card">
+          <div class="profile-avatar" id="profileAvatar">JD</div>
+          <h2 id="profileName">John Doe</h2>
+          <p class="profile-email" id="profileEmail">john@example.com</p>
+          <button class="btn btn-primary btn-block" onclick="logout()">Logout</button>
+        </div>
+
+        <nav class="profile-nav">
+          <a href="#" class="profile-nav-item active" onclick="switchTab('overview', event)">📋 Overview</a>
+          <a href="#" class="profile-nav-item" onclick="switchTab('listings', event)">🚗 My Listings</a>
+          <a href="#" class="profile-nav-item" onclick="switchTab('settings', event)">⚙️ Settings</a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <section class="profile-main">
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+          <div class="content-card card">
+            <h3>Account Information</h3>
+            <div class="info-table">
+              <div class="info-row">
+                <span class="info-label">Full Name:</span>
+                <span class="info-value" id="infoName">-</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Email:</span>
+                <span class="info-value" id="infoEmail">-</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Phone:</span>
+                <span class="info-value" id="infoPhone">-</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Member Since:</span>
+                <span class="info-value" id="infoJoinDate">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Listings Tab -->
+        <div id="listings" class="tab-content">
+          <div class="listings-container" id="listingsContainer">
+            <div class="empty-state">
+              <p>You haven't listed any cars yet.</p>
+              <a href="sell-car.html" class="btn btn-primary">List Your Car</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-content">
+          <div class="content-card card">
+            <h3>Settings</h3>
+            <div class="settings-group">
+              <h4>Email Notifications</h4>
+              <label class="checkbox-item">
+                <input type="checkbox" checked>
+                <span>Receive new buyer inquiries</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" checked>
+                <span>Get promotional offers</span>
+              </label>
+            </div>
+
+            <div class="settings-group">
+              <h4>Privacy</h4>
+              <label class="checkbox-item">
+                <input type="checkbox" checked>
+                <span>Show my phone number on listings</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox">
+                <span>Make profile public</span>
+              </label>
+            </div>
+
+            <button class="btn btn-primary">Save Settings</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

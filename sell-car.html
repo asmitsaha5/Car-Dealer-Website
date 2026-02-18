@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell Your Car - AutoHub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Sell Your Car</h1>
+      <p>Get the best value for your vehicle quickly and easily</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="sell-car-container">
+      <!-- Benefits Section -->
+      <section class="benefits-section">
+        <h2 class="section-title">Why Sell With AutoHub?</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card card">
+            <div class="benefit-icon">⚡</div>
+            <h3>Fast & Easy</h3>
+            <p>List your car in minutes with our simple online form</p>
+          </div>
+          <div class="benefit-card card">
+            <div class="benefit-icon">💰</div>
+            <h3>Best Price</h3>
+            <p>Get competitive offers from verified buyers</p>
+          </div>
+          <div class="benefit-card card">
+            <div class="benefit-icon">🔒</div>
+            <h3>Safe & Secure</h3>
+            <p>All transactions are verified and protected</p>
+          </div>
+          <div class="benefit-card card">
+            <div class="benefit-icon">📱</div>
+            <h3>Wide Reach</h3>
+            <p>Reach thousands of potential buyers nationwide</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Form Section -->
+      <section class="form-section">
+        <div class="form-container">
+          <div class="form-header">
+            <h2>Sell Your Vehicle</h2>
+            <p>Fill in the details below to list your car</p>
+          </div>
+
+          <div id="formSuccess" class="form-success-message"></div>
+          <div id="formError" class="form-error-message"></div>
+
+          <form id="sellCarForm" onsubmit="handleFormSubmit(event)">
+            <!-- Vehicle Information Section -->
+            <div class="form-section-title">Vehicle Information</div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="brand" class="form-label required">Brand</label>
+                <select id="brand" class="form-select" required>
+                  <option value="">Select Brand</option>
+                  <option value="Tesla">Tesla</option>
+                  <option value="BMW">BMW</option>
+                  <option value="Honda">Honda</option>
+                  <option value="Audi">Audi</option>
+                  <option value="Toyota">Toyota</option>
+                  <option value="Volkswagen">Volkswagen</option>
+                  <option value="Ford">Ford</option>
+                  <option value="Mazda">Mazda</option>
+                  <option value="Mercedes-Benz">Mercedes-Benz</option>
+                  <option value="Porsche">Porsche</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="model" class="form-label required">Model</label>
+                <input type="text" id="model" class="form-input" placeholder="e.g., Model 3" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="year" class="form-label required">Year</label>
+                <input type="number" id="year" class="form-input" placeholder="e.g., 2023" min="1990" max="2030" required>
+              </div>
+              <div class="form-group">
+                <label for="mileage" class="form-label required">Mileage (miles)</label>
+                <input type="number" id="mileage" class="form-input" placeholder="e.g., 50000" min="0" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fuelType" class="form-label required">Fuel Type</label>
+                <select id="fuelType" class="form-select" required>
+                  <option value="">Select Fuel Type</option>
+                  <option value="Petrol">Petrol</option>
+                  <option value="Diesel">Diesel</option>
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="Electric">Electric</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="transmission" class="form-label required">Transmission</label>
+                <select id="transmission" class="form-select" required>
+                  <option value="">Select Transmission</option>
+                  <option value="Manual">Manual</option>
+                  <option value="Automatic">Automatic</option>
+                  <option value="CVT">CVT</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Car Details Section -->
+            <div class="form-section-title">Car Details</div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="color" class="form-label required">Color</label>
+                <input type="text" id="color" class="form-input" placeholder="e.g., Black Pearl" required>
+              </div>
+              <div class="form-group">
+                <label for="price" class="form-label required">Asking Price ($)</label>
+                <input type="number" id="price" class="form-input" placeholder="e.g., 25000" min="0" step="100" required>
+              </div>
+            </div>
+
+            <div class="form-group form-full-width">
+              <label for="description" class="form-label required">Description</label>
+              <textarea id="description" class="form-textarea" placeholder="Describe the condition and features of your car..." required></textarea>
+            </div>
+
+            <div class="form-group form-full-width">
+              <label for="location" class="form-label required">Location</label>
+              <input type="text" id="location" class="form-input" placeholder="City, State" required>
+            </div>
+
+            <!-- Condition Section -->
+            <div class="form-section-title">Vehicle Condition</div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="exterior" class="form-label required">Exterior Condition</label>
+                <select id="exterior" class="form-select" required>
+                  <option value="">Select Condition</option>
+                  <option value="Excellent">Excellent</option>
+                  <option value="Good">Good</option>
+                  <option value="Fair">Fair</option>
+                  <option value="Poor">Poor</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="interior" class="form-label required">Interior</label>
+                <input type="text" id="interior" class="form-input" placeholder="e.g., Black Leather" required>
+              </div>
+            </div>
+
+            <!-- Owner Information Section -->
+            <div class="form-section-title">Your Information</div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ownerName" class="form-label required">Full Name</label>
+                <input type="text" id="ownerName" class="form-input" placeholder="Your Name" required>
+              </div>
+              <div class="form-group">
+                <label for="ownerPhone" class="form-label required">Phone Number</label>
+                <input type="tel" id="ownerPhone" class="form-input" placeholder="+1 (234) 567-8900" required>
+              </div>
+            </div>
+
+            <div class="form-group form-full-width">
+              <label for="ownerEmail" class="form-label required">Email Address</label>
+              <input type="email" id="ownerEmail" class="form-input" placeholder="your.email@example.com" required>
+            </div>
+
+            <!-- Agreement Section -->
+            <div class="form-group form-full-width">
+              <label class="checkbox-item">
+                <input type="checkbox" id="agreement" required>
+                <span>I agree to the Terms of Service and acknowledge that my listing will be visible to all users</span>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-buttons">
+              <button type="submit" class="form-btn form-btn-submit">List Your Car</button>
+              <button type="reset" class="form-btn form-btn-reset">Clear Form</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sell-car.js"></script>
+</body>
+</html>
