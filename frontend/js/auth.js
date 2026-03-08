@@ -299,3 +299,4 @@ authStyles.textContent = `
 `;
 
 document.head.appendChild(authStyles);
+
