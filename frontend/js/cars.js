@@ -1,109 +1,74 @@
-// ============================================
-// CARS LISTING PAGE JAVASCRIPT
-// ============================================
-
 let filteredCars = [...carsData];
 let currentPage = 1;
 const carsPerPage = 9;
 
-/**
- * Initialize cars listing page
- */
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize filteredCars with all cars
   filteredCars = [...carsData];
-  
-  // Check if category filter is in URL
+
   const urlParams = new URLSearchParams(window.location.search);
   const category = urlParams.get('category');
-  
+
   if (category) {
     filterByCategory(category);
   } else {
-    // Show all cars initially
     displayCars();
   }
-  
+
   attachFilterListeners();
 });
 
-/**
- * Filter cars by category
- * @param {string} category - Category name (Sports Cars, SUVs, Electric, Family Cars)
- */
 function filterByCategory(category) {
-  let fuelTypeFilter = '';
-  let modelFilter = '';
-  
-  switch(category) {
+  switch (category) {
     case 'Sports Cars':
-      // Filter for sports/performance cars (Mustang, Tesla Model 3, high horsepower)
-      filteredCars = carsData.filter(car => 
+      filteredCars = carsData.filter(car =>
         car.model === 'Mustang' || car.title.includes('Model 3') || car.horsepower > 280
       );
       break;
     case 'SUVs':
-      // Filter for SUVs/crossovers
-      filteredCars = carsData.filter(car => 
+      filteredCars = carsData.filter(car =>
         car.model.includes('X5') || car.model.includes('CX-5') || car.title.includes('SUV')
       );
       break;
     case 'Electric':
-      // Filter for electric vehicles
       filteredCars = carsData.filter(car => car.fuelType === 'Electric');
       break;
     case 'Family Cars':
-      // Filter for family sedans and practical cars
-      filteredCars = carsData.filter(car => 
+      filteredCars = carsData.filter(car =>
         car.model === 'Civic' || car.model === 'Camry' || car.model === 'Golf' || car.model === 'A4'
       );
       break;
     default:
       filteredCars = [...carsData];
   }
-  
+
   applySorting();
 }
 
-/**
- * Attach event listeners to filters
- */
 function attachFilterListeners() {
-  // Price filter
   document.getElementById('minPrice').addEventListener('change', applyFilters);
   document.getElementById('maxPrice').addEventListener('change', applyFilters);
-
-  // Brand filter
   document.getElementById('brandFilter').addEventListener('change', applyFilters);
 
-  // Fuel type filters
   document.querySelectorAll('.fuel-filter').forEach(checkbox => {
     checkbox.addEventListener('change', applyFilters);
   });
 
-  // Transmission filters
   document.querySelectorAll('.transmission-filter').forEach(checkbox => {
     checkbox.addEventListener('change', applyFilters);
   });
 
-  // Mileage filters
   document.querySelectorAll('.mileage-filter').forEach(checkbox => {
     checkbox.addEventListener('change', applyFilters);
   });
 
-  // Search input with debounce
   const searchInput = document.getElementById('searchInput');
   if (searchInput) {
     searchInput.addEventListener('input', debounce(applyFilters, 300));
   }
 
-  // Sort select
   document.getElementById('sortSelect').addEventListener('change', applySorting);
 }
 
-/**
- * Apply all filters
- */
 function applyFilters() {
   currentPage = 1;
   const minPrice = parseFloat(document.getElementById('minPrice').value) || 0;
@@ -111,30 +76,16 @@ function applyFilters() {
   const brand = document.getElementById('brandFilter').value;
   const searchQuery = document.getElementById('searchInput').value.toLowerCase();
 
-  // Get selected fuel types
   const fuelTypes = Array.from(document.querySelectorAll('.fuel-filter:checked')).map(cb => cb.value);
-
-  // Get selected transmissions
   const transmissions = Array.from(document.querySelectorAll('.transmission-filter:checked')).map(cb => cb.value);
-
-  // Get selected mileage ranges
   const mileageRanges = Array.from(document.querySelectorAll('.mileage-filter:checked')).map(cb => cb.value);
 
-  // Filter cars
   filteredCars = carsData.filter(car => {
-    // Price filter
     if (car.price < minPrice || car.price > maxPrice) return false;
-
-    // Brand filter
     if (brand && car.brand !== brand) return false;
-
-    // Fuel type filter
     if (fuelTypes.length > 0 && !fuelTypes.includes(car.fuelType)) return false;
-
-    // Transmission filter
     if (transmissions.length > 0 && !transmissions.includes(car.transmission)) return false;
 
-    // Mileage filter
     if (mileageRanges.length > 0) {
       const mileageInRange = mileageRanges.some(range => {
         if (range === '0-20000') return car.mileage <= 20000;
@@ -146,7 +97,6 @@ function applyFilters() {
       if (!mileageInRange) return false;
     }
 
-    // Search filter
     if (searchQuery) {
       const searchableText = `${car.title} ${car.brand} ${car.model} ${car.location}`.toLowerCase();
       if (!searchableText.includes(searchQuery)) return false;
@@ -158,9 +108,6 @@ function applyFilters() {
   applySorting();
 }
 
-/**
- * Apply sorting to filtered cars
- */
 function applySorting() {
   const sortValue = document.getElementById('sortSelect').value;
 
@@ -171,16 +118,12 @@ function applySorting() {
   } else if (sortValue === 'mileage-low') {
     filteredCars.sort((a, b) => a.mileage - b.mileage);
   } else {
-    // Latest first (default)
     filteredCars.sort((a, b) => b.year - a.year || b.id - a.id);
   }
 
   displayCars();
 }
 
-/**
- * Display cars for current page
- */
 function displayCars() {
   const carsGrid = document.getElementById('carsGrid');
   const noResults = document.getElementById('noResults');
@@ -198,13 +141,11 @@ function displayCars() {
   carsGrid.style.display = 'grid';
   noResults.style.display = 'none';
 
-  // Calculate pagination
   const totalPages = Math.ceil(filteredCars.length / carsPerPage);
   const startIndex = (currentPage - 1) * carsPerPage;
   const endIndex = startIndex + carsPerPage;
   const paginatedCars = filteredCars.slice(startIndex, endIndex);
 
-  // Render cars
   carsGrid.innerHTML = paginatedCars.map(car => `
     <div class="car-card card">
       <div class="car-image-wrapper">
@@ -225,14 +166,9 @@ function displayCars() {
     </div>
   `).join('');
 
-  // Render pagination
   renderPagination(totalPages);
 }
 
-/**
- * Render pagination controls
- * @param {number} totalPages - Total number of pages
- */
 function renderPagination(totalPages) {
   const pagination = document.getElementById('pagination');
 
@@ -243,12 +179,10 @@ function renderPagination(totalPages) {
 
   let html = '<div class="pagination-buttons">';
 
-  // Previous button
   if (currentPage > 1) {
     html += `<button class="pagination-btn" onclick="goToPage(${currentPage - 1})">← Previous</button>`;
   }
 
-  // Page numbers
   for (let i = 1; i <= totalPages; i++) {
     if (i === currentPage) {
       html += `<button class="pagination-btn active">${i}</button>`;
@@ -257,7 +191,6 @@ function renderPagination(totalPages) {
     }
   }
 
-  // Next button
   if (currentPage < totalPages) {
     html += `<button class="pagination-btn" onclick="goToPage(${currentPage + 1})">Next →</button>`;
   }
@@ -266,19 +199,12 @@ function renderPagination(totalPages) {
   pagination.innerHTML = html;
 }
 
-/**
- * Go to specific page
- * @param {number} pageNumber - Page number
- */
 function goToPage(pageNumber) {
   currentPage = pageNumber;
   displayCars();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/**
- * Reset all filters
- */
 function resetFilters() {
   document.getElementById('minPrice').value = '0';
   document.getElementById('maxPrice').value = '6000000';
@@ -295,12 +221,8 @@ function resetFilters() {
   displayCars();
 }
 
-// Add cars page specific styles
 const carsStyles = document.createElement('style');
 carsStyles.textContent = `
-  /* ============================================
-     PAGE HEADER
-     ============================================ */
   .page-header {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     padding: 60px var(--spacing-lg) 40px;
@@ -320,9 +242,6 @@ carsStyles.textContent = `
     font-size: 1.1rem;
   }
 
-  /* ============================================
-     MAIN CONTENT
-     ============================================ */
   .main-content {
     padding: var(--spacing-xl) 0;
   }
@@ -333,9 +252,6 @@ carsStyles.textContent = `
     gap: var(--spacing-xl);
   }
 
-  /* ============================================
-     FILTERS SIDEBAR
-     ============================================ */
   .filters-sidebar {
     height: fit-content;
     position: sticky;
@@ -466,18 +382,12 @@ carsStyles.textContent = `
     color: var(--text-primary);
   }
 
-  /* ============================================
-     CARS MAIN
-     ============================================ */
   .cars-main {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
   }
 
-  /* ============================================
-     CARS HEADER (Search & Sort)
-     ============================================ */
   .cars-header {
     display: flex;
     gap: var(--spacing-lg);
@@ -510,17 +420,11 @@ carsStyles.textContent = `
     box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.1);
   }
 
-  /* ============================================
-     RESULTS INFO
-     ============================================ */
   .results-info {
     color: var(--text-secondary);
     font-size: 0.95rem;
   }
 
-  /* ============================================
-     CARS GRID
-     ============================================ */
   .cars-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -569,9 +473,6 @@ carsStyles.textContent = `
     border-radius: var(--radius-sm);
   }
 
-  /* ============================================
-     NO RESULTS
-     ============================================ */
   .no-results {
     text-align: center;
     padding: var(--spacing-xl);
@@ -586,9 +487,6 @@ carsStyles.textContent = `
     color: var(--text-secondary);
   }
 
-  /* ============================================
-     PAGINATION
-     ============================================ */
   .pagination {
     margin-top: var(--spacing-xl);
     padding-top: var(--spacing-lg);
@@ -625,9 +523,6 @@ carsStyles.textContent = `
     border-color: var(--accent-color);
   }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
   @media (max-width: 1024px) {
     .cars-container {
       grid-template-columns: 1fr;

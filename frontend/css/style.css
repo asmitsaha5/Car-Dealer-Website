@@ -1,8 +1,4 @@
-/* ============================================
-   CSS CUSTOM PROPERTIES & VARIABLES
-   ============================================ */
 :root {
-  /* Color Palette - Premium Dark Theme */
   --primary-color: #1a1a2e;
   --secondary-color: #16213e;
   --accent-color: #e94560;
@@ -14,29 +10,22 @@
   --bg-dark: #0f1622;
   --bg-card: #16213e;
 
-  /* Typography */
   --font-primary: 'Poppins', sans-serif;
   --font-secondary: 'Roboto', sans-serif;
 
-  /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
 
-  /* Border Radius */
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
 
-  /* Transitions */
   --transition: all 0.3s ease;
 }
 
-/* ============================================
-   GLOBAL STYLES
-   ============================================ */
 * {
   margin: 0;
   padding: 0;
@@ -55,9 +44,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ============================================
-   NAVBAR STYLES
-   ============================================ */
 .navbar {
   background-color: var(--primary-color);
   padding: var(--spacing-md) 0;
@@ -167,9 +153,6 @@ body {
   transition: var(--transition);
 }
 
-/* ============================================
-   FOOTER STYLES
-   ============================================ */
 .footer {
   background-color: var(--secondary-color);
   margin-top: var(--spacing-xl);
@@ -223,9 +206,6 @@ body {
   font-size: 0.9rem;
 }
 
-/* ============================================
-   CONTAINER & SECTIONS
-   ============================================ */
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -251,9 +231,6 @@ body {
   font-size: 1.1rem;
 }
 
-/* ============================================
-   BUTTONS
-   ============================================ */
 .btn {
   padding: var(--spacing-sm) var(--spacing-lg);
   border: none;
@@ -293,9 +270,6 @@ body {
   width: 100%;
 }
 
-/* ============================================
-   CARDS
-   ============================================ */
 .card {
   background-color: var(--bg-card);
   border-radius: var(--radius-lg);
@@ -337,9 +311,6 @@ body {
   margin-bottom: var(--spacing-md);
 }
 
-/* ============================================
-   FORMS
-   ============================================ */
 .form-group {
   margin-bottom: var(--spacing-md);
 }
@@ -388,7 +359,6 @@ body {
   min-height: 120px;
 }
 
-/* Style for select dropdown options */
 .form-select option {
   background-color: var(--bg-card);
   color: var(--text-primary);
@@ -417,9 +387,6 @@ body {
   box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1) !important;
 }
 
-/* ============================================
-   UTILITIES
-   ============================================ */
 .text-center {
   text-align: center;
 }
@@ -470,14 +437,12 @@ body {
   align-items: center;
 }
 
-/* ============================================
-   ANIMATIONS
-   ============================================ */
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -489,6 +454,7 @@ body {
     opacity: 0;
     transform: translateX(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -500,6 +466,7 @@ body {
     opacity: 0;
     transform: translateX(30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);

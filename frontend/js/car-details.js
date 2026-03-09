@@ -1,25 +1,13 @@
-// ============================================
-// CAR DETAILS PAGE JAVASCRIPT
-// ============================================
-
 let currentCar = null;
 
-/**
- * Initialize car details page
- */
 document.addEventListener('DOMContentLoaded', () => {
   const carId = parseInt(getQueryParam('id'));
   loadCarDetails(carId);
 });
 
-/**
- * Load car details by ID
- * @param {number} carId - Car ID
- */
 function loadCarDetails(carId) {
   const detailsContainer = document.getElementById('detailsContainer');
 
-  // Find car in data
   currentCar = carsData.find(car => car.id === carId);
 
   if (!currentCar) {
@@ -33,13 +21,10 @@ function loadCarDetails(carId) {
     return;
   }
 
-  // Update breadcrumb
   document.getElementById('breadcrumbTitle').textContent = currentCar.title;
 
-  // Render car details
   detailsContainer.innerHTML = `
     <div class="details-grid">
-      <!-- Image Gallery -->
       <div class="details-images">
         <div class="main-image-wrapper">
           <img src="${currentCar.image}" alt="${currentCar.title}" class="main-image" onerror="this.src='https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=800&h=600&fit=crop'">
@@ -47,7 +32,6 @@ function loadCarDetails(carId) {
         </div>
       </div>
 
-      <!-- Details Panel -->
       <div class="details-panel">
         <h1 class="details-title">${currentCar.title}</h1>
         <div class="details-meta">
@@ -55,13 +39,11 @@ function loadCarDetails(carId) {
           <span class="meta-item">⏱️ ${currentCar.year}</span>
         </div>
 
-        <!-- Price Section -->
         <div class="price-section">
           <div class="price-label">Listed Price</div>
           <div class="price-value">${formatPrice(currentCar.price)}</div>
         </div>
 
-        <!-- Quick Specs -->
         <div class="quick-specs">
           <div class="spec-item">
             <div class="spec-icon">🚗</div>
@@ -93,7 +75,6 @@ function loadCarDetails(carId) {
           </div>
         </div>
 
-        <!-- Features -->
         <div class="features-section">
           <h3>Key Features</h3>
           <ul class="features-list">
@@ -101,7 +82,6 @@ function loadCarDetails(carId) {
           </ul>
         </div>
 
-        <!-- Call to Action Buttons -->
         <div class="cta-buttons">
           <button class="btn btn-primary" onclick="openContactModal()">Contact Seller</button>
           <button class="btn btn-secondary" onclick="shareCar()">Share</button>
@@ -109,7 +89,6 @@ function loadCarDetails(carId) {
       </div>
     </div>
 
-    <!-- Full Details Section -->
     <div class="full-details-section">
       <h2>Vehicle Information</h2>
 
@@ -119,7 +98,6 @@ function loadCarDetails(carId) {
         <button class="tab-button" onclick="switchTab('seller')">Seller Info</button>
       </div>
 
-      <!-- Overview Tab -->
       <div id="overview" class="tab-content active">
         <div class="description-box">
           <h3>About This Vehicle</h3>
@@ -146,7 +124,6 @@ function loadCarDetails(carId) {
         </div>
       </div>
 
-      <!-- Specifications Tab -->
       <div id="specifications" class="tab-content">
         <div class="specs-table">
           <div class="spec-row">
@@ -192,7 +169,6 @@ function loadCarDetails(carId) {
         </div>
       </div>
 
-      <!-- Seller Info Tab -->
       <div id="seller" class="tab-content">
         <div class="seller-info">
           <div class="seller-card">
@@ -218,35 +194,23 @@ function loadCarDetails(carId) {
     </div>
   `;
 
-  // Load related cars
   loadRelatedCars();
 }
 
-/**
- * Switch between tabs
- * @param {string} tabName - Tab name
- */
-function switchTab(tabName) {
-  // Hide all tabs
+function switchTab(tabName, ev) {
   document.querySelectorAll('.tab-content').forEach(tab => {
     tab.classList.remove('active');
   });
 
-  // Remove active class from buttons
   document.querySelectorAll('.tab-button').forEach(btn => {
     btn.classList.remove('active');
   });
 
-  // Show selected tab
   document.getElementById(tabName).classList.add('active');
 
-  // Add active class to clicked button
-  event.target.classList.add('active');
+  ev.target.classList.add('active');
 }
 
-/**
- * Load related cars (similar brand or price range)
- */
 function loadRelatedCars() {
   const relatedCarsContainer = document.getElementById('relatedCars');
 
@@ -274,25 +238,15 @@ function loadRelatedCars() {
   `).join('');
 }
 
-/**
- * Open contact modal
- */
 function openContactModal() {
   document.getElementById('contactModal').style.display = 'flex';
 }
 
-/**
- * Close contact modal
- */
 function closeContactModal() {
   document.getElementById('contactModal').style.display = 'none';
   document.getElementById('contactForm').reset();
 }
 
-/**
- * Handle contact form submission
- * @param {Event} event - Form event
- */
 function handleContactSubmit(event) {
   event.preventDefault();
 
@@ -301,7 +255,6 @@ function handleContactSubmit(event) {
   const phone = document.getElementById('contactPhone').value;
   const message = document.getElementById('contactMessage').value;
 
-  // Validate form
   if (!name || !email || !phone || !message) {
     showNotification('Please fill in all fields', 'error');
     return;
@@ -312,16 +265,12 @@ function handleContactSubmit(event) {
     return;
   }
 
-  // In a real app, this would send data to a backend
   console.log('Contact form submitted:', { name, email, phone, message, carId: currentCar.id });
 
   showNotification('Message sent successfully! The seller will contact you soon.', 'success');
   closeContactModal();
 }
 
-/**
- * Share car details
- */
 function shareCar() {
   const url = window.location.href;
   const title = currentCar.title;
@@ -333,7 +282,6 @@ function shareCar() {
       url: url
     }).catch(err => console.log('Error sharing:', err));
   } else {
-    // Fallback: Copy to clipboard
     copyToClipboard(url).then(success => {
       if (success) {
         showNotification('Link copied to clipboard!', 'success');
@@ -342,7 +290,6 @@ function shareCar() {
   }
 }
 
-// Close modal when clicking outside
 document.addEventListener('click', (e) => {
   const modal = document.getElementById('contactModal');
   if (e.target === modal) {
@@ -350,19 +297,12 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Add car details page specific styles
 const detailsStyles = document.createElement('style');
 detailsStyles.textContent = `
-  /* ============================================
-     MAIN CONTENT & LAYOUT
-     ============================================ */
   .main-content {
     padding: var(--spacing-xl) 0;
   }
 
-  /* ============================================
-     BREADCRUMB
-     ============================================ */
   .breadcrumb {
     margin-bottom: var(--spacing-lg);
     color: var(--text-secondary);
@@ -379,9 +319,6 @@ detailsStyles.textContent = `
     text-decoration: underline;
   }
 
-  /* ============================================
-     DETAILS CONTAINER
-     ============================================ */
   .details-container {
     background-color: var(--bg-card);
     border-radius: var(--radius-lg);
@@ -390,18 +327,12 @@ detailsStyles.textContent = `
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
 
-  /* ============================================
-     LOADING STATE
-     ============================================ */
   .loading {
     text-align: center;
     padding: var(--spacing-xl);
     color: var(--text-secondary);
   }
 
-  /* ============================================
-     DETAILS GRID
-     ============================================ */
   .details-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -409,9 +340,6 @@ detailsStyles.textContent = `
     margin-bottom: var(--spacing-xl);
   }
 
-  /* ============================================
-     DETAILS IMAGES
-     ============================================ */
   .main-image-wrapper {
     position: relative;
     border-radius: var(--radius-lg);
@@ -438,9 +366,6 @@ detailsStyles.textContent = `
     font-family: var(--font-primary);
   }
 
-  /* ============================================
-     DETAILS PANEL
-     ============================================ */
   .details-panel {
     display: flex;
     flex-direction: column;
@@ -466,9 +391,6 @@ detailsStyles.textContent = `
     gap: 0.5rem;
   }
 
-  /* ============================================
-     PRICE SECTION
-     ============================================ */
   .price-section {
     padding: var(--spacing-lg);
     background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(255, 107, 157, 0.1));
@@ -489,9 +411,6 @@ detailsStyles.textContent = `
     font-family: var(--font-primary);
   }
 
-  /* ============================================
-     QUICK SPECS
-     ============================================ */
   .quick-specs {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -525,9 +444,6 @@ detailsStyles.textContent = `
     color: var(--text-primary);
   }
 
-  /* ============================================
-     FEATURES SECTION
-     ============================================ */
   .features-section h3 {
     margin-bottom: var(--spacing-md);
     font-family: var(--font-primary);
@@ -545,9 +461,6 @@ detailsStyles.textContent = `
     padding: var(--spacing-sm) 0;
   }
 
-  /* ============================================
-     CTA BUTTONS
-     ============================================ */
   .cta-buttons {
     display: flex;
     gap: var(--spacing-md);
@@ -558,9 +471,6 @@ detailsStyles.textContent = `
     flex: 1;
   }
 
-  /* ============================================
-     FULL DETAILS SECTION
-     ============================================ */
   .full-details-section {
     background-color: var(--bg-card);
     border-radius: var(--radius-lg);
@@ -573,9 +483,6 @@ detailsStyles.textContent = `
     font-family: var(--font-primary);
   }
 
-  /* ============================================
-     TABS
-     ============================================ */
   .details-tabs {
     display: flex;
     gap: var(--spacing-sm);
@@ -604,9 +511,6 @@ detailsStyles.textContent = `
     border-bottom-color: var(--accent-color);
   }
 
-  /* ============================================
-     TAB CONTENT
-     ============================================ */
   .tab-content {
     display: none;
   }
@@ -632,9 +536,6 @@ detailsStyles.textContent = `
     line-height: 1.8;
   }
 
-  /* ============================================
-     INFO GRID
-     ============================================ */
   .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -656,9 +557,6 @@ detailsStyles.textContent = `
     color: var(--text-secondary);
   }
 
-  /* ============================================
-     SPECS TABLE
-     ============================================ */
   .specs-table {
     display: grid;
     gap: 0;
@@ -686,9 +584,6 @@ detailsStyles.textContent = `
     font-weight: 600;
   }
 
-  /* ============================================
-     SELLER INFO
-     ============================================ */
   .seller-info {
     display: flex;
     justify-content: center;
@@ -758,16 +653,10 @@ detailsStyles.textContent = `
     margin-top: var(--spacing-md);
   }
 
-  /* ============================================
-     RELATED SECTION
-     ============================================ */
   .related-section {
     margin-top: var(--spacing-xl);
   }
 
-  /* ============================================
-     MODAL
-     ============================================ */
   .modal {
     display: none;
     position: fixed;
@@ -812,9 +701,6 @@ detailsStyles.textContent = `
     color: var(--text-primary);
   }
 
-  /* ============================================
-     ERROR MESSAGE
-     ============================================ */
   .error-message {
     text-align: center;
     padding: var(--spacing-xl);
@@ -825,9 +711,6 @@ detailsStyles.textContent = `
     margin-bottom: var(--spacing-md);
   }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
   @media (max-width: 1024px) {
     .details-grid {
       grid-template-columns: 1fr;

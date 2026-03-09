@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,13 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/forms.css">
   <link rel="stylesheet" href="css/responsive.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
-  <!-- Navbar -->
   <div id="navbar"></div>
 
-  <!-- Page Header -->
   <section class="page-header">
     <div class="container">
       <h1>Sell Your Car</h1>
@@ -23,7 +24,6 @@
 
   <main class="container">
     <div class="sell-car-container">
-      <!-- Benefits Section -->
       <section class="benefits-section">
         <h2 class="section-title">Why Sell With AutoHub?</h2>
         <div class="benefits-grid">
@@ -50,7 +50,6 @@
         </div>
       </section>
 
-      <!-- Form Section -->
       <section class="form-section">
         <div class="form-container">
           <div class="form-header">
@@ -62,7 +61,6 @@
           <div id="formError" class="form-error-message"></div>
 
           <form id="sellCarForm" onsubmit="handleFormSubmit(event)">
-            <!-- Vehicle Information Section -->
             <div class="form-section-title">Vehicle Information</div>
 
             <div class="form-row">
@@ -91,7 +89,8 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="year" class="form-label required">Year</label>
-                <input type="number" id="year" class="form-input" placeholder="e.g., 2023" min="1990" max="2030" required>
+                <input type="number" id="year" class="form-input" placeholder="e.g., 2023" min="1990" max="2030"
+                  required>
               </div>
               <div class="form-group">
                 <label for="mileage" class="form-label required">Mileage (miles)</label>
@@ -121,7 +120,6 @@
               </div>
             </div>
 
-            <!-- Car Details Section -->
             <div class="form-section-title">Car Details</div>
 
             <div class="form-row">
@@ -131,13 +129,15 @@
               </div>
               <div class="form-group">
                 <label for="price" class="form-label required">Asking Price ($)</label>
-                <input type="number" id="price" class="form-input" placeholder="e.g., 25000" min="0" step="100" required>
+                <input type="number" id="price" class="form-input" placeholder="e.g., 25000" min="0" step="100"
+                  required>
               </div>
             </div>
 
             <div class="form-group form-full-width">
               <label for="description" class="form-label required">Description</label>
-              <textarea id="description" class="form-textarea" placeholder="Describe the condition and features of your car..." required></textarea>
+              <textarea id="description" class="form-textarea"
+                placeholder="Describe the condition and features of your car..." required></textarea>
             </div>
 
             <div class="form-group form-full-width">
@@ -145,7 +145,6 @@
               <input type="text" id="location" class="form-input" placeholder="City, State" required>
             </div>
 
-            <!-- Condition Section -->
             <div class="form-section-title">Vehicle Condition</div>
 
             <div class="form-row">
@@ -165,7 +164,6 @@
               </div>
             </div>
 
-            <!-- Owner Information Section -->
             <div class="form-section-title">Your Information</div>
 
             <div class="form-row">
@@ -184,15 +182,14 @@
               <input type="email" id="ownerEmail" class="form-input" placeholder="your.email@example.com" required>
             </div>
 
-            <!-- Agreement Section -->
             <div class="form-group form-full-width">
               <label class="checkbox-item">
                 <input type="checkbox" id="agreement" required>
-                <span>I agree to the Terms of Service and acknowledge that my listing will be visible to all users</span>
+                <span>I agree to the Terms of Service and acknowledge that my listing will be visible to all
+                  users</span>
               </label>
             </div>
 
-            <!-- Submit Button -->
             <div class="form-buttons">
               <button type="submit" class="form-btn form-btn-submit">List Your Car</button>
               <button type="reset" class="form-btn form-btn-reset">Clear Form</button>
@@ -203,13 +200,12 @@
     </div>
   </main>
 
-  <!-- Footer -->
   <div id="footer"></div>
 
-  <!-- Scripts -->
   <script src="js/utils.js"></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
   <script src="js/sell-car.js"></script>
 </body>
+
 </html>

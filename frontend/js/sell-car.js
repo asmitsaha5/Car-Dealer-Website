@@ -1,17 +1,7 @@
-// ============================================
-// SELL CAR PAGE JAVASCRIPT
-// ============================================
-
-/**
- * Initialize sell car page
- */
 document.addEventListener('DOMContentLoaded', () => {
   setupFormValidation();
 });
 
-/**
- * Setup real-time form validation
- */
 function setupFormValidation() {
   const form = document.getElementById('sellCarForm');
   const inputs = form.querySelectorAll('input, select, textarea');
@@ -22,34 +12,24 @@ function setupFormValidation() {
   });
 }
 
-/**
- * Validate individual field
- * @param {HTMLElement} field - Form field element
- * @returns {boolean} True if valid
- */
 function validateField(field) {
   let isValid = true;
   let errorMessage = '';
 
-  // Skip validation for checkboxes
   if (field.type === 'checkbox') return true;
 
-  // Empty field check
   if (field.value.trim() === '' && field.hasAttribute('required')) {
     isValid = false;
     errorMessage = 'This field is required';
   }
-  // Email validation
   else if (field.type === 'email' && field.value.trim() !== '') {
     isValid = isValidEmail(field.value);
     errorMessage = 'Please enter a valid email address';
   }
-  // Phone validation
   else if (field.id === 'ownerPhone' && field.value.trim() !== '') {
     isValid = isValidPhone(field.value);
     errorMessage = 'Please enter a valid phone number';
   }
-  // Number field validation
   else if (field.type === 'number') {
     if (field.id === 'year') {
       const year = parseInt(field.value);
@@ -64,7 +44,6 @@ function validateField(field) {
     }
   }
 
-  // Update field styling
   if (isValid) {
     field.classList.remove('input-error');
     removeFieldError(field);
@@ -76,11 +55,6 @@ function validateField(field) {
   return isValid;
 }
 
-/**
- * Show field error message
- * @param {HTMLElement} field - Form field
- * @param {string} message - Error message
- */
 function showFieldError(field, message) {
   let errorElement = field.parentElement.querySelector('.form-error');
   if (!errorElement) {
@@ -91,10 +65,6 @@ function showFieldError(field, message) {
   errorElement.textContent = message;
 }
 
-/**
- * Remove field error message
- * @param {HTMLElement} field - Form field
- */
 function removeFieldError(field) {
   const errorElement = field.parentElement.querySelector('.form-error');
   if (errorElement) {
@@ -102,10 +72,6 @@ function removeFieldError(field) {
   }
 }
 
-/**
- * Validate entire form
- * @returns {boolean} True if all fields are valid
- */
 function validateForm() {
   const form = document.getElementById('sellCarForm');
   const inputs = form.querySelectorAll('input, select, textarea');
@@ -117,7 +83,6 @@ function validateForm() {
     }
   });
 
-  // Check agreement checkbox
   const agreement = document.getElementById('agreement');
   if (!agreement.checked) {
     isFormValid = false;
@@ -127,21 +92,15 @@ function validateForm() {
   return isFormValid;
 }
 
-/**
- * Handle form submission
- * @param {Event} event - Form event
- */
 function handleFormSubmit(event) {
   event.preventDefault();
 
   const formError = document.getElementById('formError');
   const formSuccess = document.getElementById('formSuccess');
 
-  // Clear previous messages
   formError.classList.remove('show');
   formSuccess.classList.remove('show');
 
-  // Validate form
   if (!validateForm()) {
     formError.textContent = 'Please fill in all required fields correctly';
     formError.classList.add('show');
@@ -149,7 +108,6 @@ function handleFormSubmit(event) {
     return;
   }
 
-  // Collect form data
   const formData = {
     brand: document.getElementById('brand').value,
     model: document.getElementById('model').value,
@@ -171,10 +129,8 @@ function handleFormSubmit(event) {
 
   console.log('[v0] Form submitted with data:', formData);
 
-  // Save to localStorage (simulating backend)
   saveCarListing(formData);
 
-  // Show success message
   formSuccess.innerHTML = `
     <div style="display: flex; align-items: center; gap: 10px;">
       <span>✓</span>
@@ -188,17 +144,12 @@ function handleFormSubmit(event) {
 
   showNotification('Car listing created successfully!', 'success');
 
-  // Reset form
   setTimeout(() => {
     document.getElementById('sellCarForm').reset();
     formSuccess.classList.remove('show');
   }, 3000);
 }
 
-/**
- * Save car listing to localStorage
- * @param {object} formData - Form data object
- */
 function saveCarListing(formData) {
   try {
     const listings = getStorage('userListings', 'local') || [];
@@ -215,19 +166,12 @@ function saveCarListing(formData) {
   }
 }
 
-// Add sell car page specific styles
 const sellCarStyles = document.createElement('style');
 sellCarStyles.textContent = `
-  /* ============================================
-     SELL CAR CONTAINER
-     ============================================ */
   .sell-car-container {
     padding: var(--spacing-xl) 0;
   }
 
-  /* ============================================
-     BENEFITS SECTION
-     ============================================ */
   .benefits-section {
     margin-bottom: var(--spacing-xl);
   }
@@ -270,16 +214,10 @@ sellCarStyles.textContent = `
     font-size: 0.95rem;
   }
 
-  /* ============================================
-     FORM SECTION
-     ============================================ */
   .form-section {
     margin-bottom: var(--spacing-xl);
   }
 
-  /* ============================================
-     FORM SECTION TITLE
-     ============================================ */
   .form-section-title {
     font-size: 1.1rem;
     font-weight: 600;
@@ -294,9 +232,6 @@ sellCarStyles.textContent = `
     margin-top: 0;
   }
 
-  /* ============================================
-     FORM LAYOUT
-     ============================================ */
   .form-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -308,9 +243,6 @@ sellCarStyles.textContent = `
     grid-column: 1 / -1;
   }
 
-  /* ============================================
-     SUCCESS/ERROR MESSAGES
-     ============================================ */
   .form-success-message {
     background-color: rgba(76, 175, 80, 0.1);
     border-left: 4px solid #4caf50;
@@ -341,9 +273,6 @@ sellCarStyles.textContent = `
     animation: slideInLeft 0.3s ease-out;
   }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
   @media (max-width: 767px) {
     .sell-car-container {
       padding: var(--spacing-lg) 0;

@@ -1,11 +1,3 @@
-// ============================================
-// CONTACT PAGE JAVASCRIPT
-// ============================================
-
-/**
- * Handle contact form submission
- * @param {Event} event - Form event
- */
 function handleContactSubmit(event) {
   event.preventDefault();
 
@@ -14,7 +6,6 @@ function handleContactSubmit(event) {
   const subject = document.getElementById('subject').value;
   const message = document.getElementById('message').value.trim();
 
-  // Validate form
   if (!name || !email || !subject || !message) {
     showNotification('Please fill in all fields', 'error');
     return;
@@ -25,10 +16,8 @@ function handleContactSubmit(event) {
     return;
   }
 
-  // Simulate sending (in real app, this would call a backend API)
   console.log('[v0] Contact form submitted:', { name, email, subject, message });
 
-  // Save contact message to localStorage
   const messages = getStorage('contactMessages', 'local') || [];
   const newMessage = {
     id: Date.now(),
@@ -41,26 +30,17 @@ function handleContactSubmit(event) {
   messages.push(newMessage);
   setStorage('contactMessages', messages, 'local');
 
-  // Show success message
   showNotification('Message sent successfully! We will get back to you soon.', 'success');
 
-  // Reset form
   document.getElementById('contactForm').reset();
 }
 
-// Add contact page specific styles
 const contactStyles = document.createElement('style');
 contactStyles.textContent = `
-  /* ============================================
-     CONTACT CONTAINER
-     ============================================ */
   .contact-container {
     padding: var(--spacing-xl) 0;
   }
 
-  /* ============================================
-     CONTACT INFO SECTION
-     ============================================ */
   .contact-info-section {
     margin-bottom: var(--spacing-xl);
   }
@@ -102,9 +82,6 @@ contactStyles.textContent = `
     text-decoration: underline;
   }
 
-  /* ============================================
-     CONTACT FORM SECTION
-     ============================================ */
   .contact-form-section {
     margin-bottom: var(--spacing-xl);
   }
@@ -114,9 +91,6 @@ contactStyles.textContent = `
     margin: 0 auto;
   }
 
-  /* ============================================
-     FAQ SECTION
-     ============================================ */
   .faq-section {
     background: linear-gradient(180deg, rgba(233, 69, 96, 0.05) 0%, transparent 100%);
   }
@@ -138,9 +112,6 @@ contactStyles.textContent = `
     line-height: 1.6;
   }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
   @media (max-width: 767px) {
     .contact-container {
       padding: var(--spacing-lg) 0;

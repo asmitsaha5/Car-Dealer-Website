@@ -12,10 +12,8 @@
 </head>
 
 <body>
-  <!-- Navbar -->
   <div id="navbar"></div>
 
-  <!-- Page Header -->
   <section class="page-header">
     <div class="container">
       <h1>Browse Cars</h1>
@@ -25,14 +23,12 @@
 
   <main class="container main-content">
     <div class="cars-container">
-      <!-- Filters Sidebar -->
       <aside class="filters-sidebar">
         <div class="filters-header">
           <h2>Filters</h2>
           <button class="btn-reset-filters" onclick="resetFilters()">Reset All</button>
         </div>
 
-        <!-- Price Range Filter -->
         <div class="filter-group">
           <h3>Price Range</h3>
           <div class="price-inputs">
@@ -42,7 +38,6 @@
           </div>
         </div>
 
-        <!-- Brand Filter -->
         <div class="filter-group">
           <h3>Brand</h3>
           <select id="brandFilter" class="form-select filter-select">
@@ -58,7 +53,6 @@
           </select>
         </div>
 
-        <!-- Fuel Type Filter -->
         <div class="filter-group">
           <h3>Fuel Type</h3>
           <div class="checkbox-group">
@@ -81,7 +75,6 @@
           </div>
         </div>
 
-        <!-- Transmission Filter -->
         <div class="filter-group">
           <h3>Transmission</h3>
           <div class="checkbox-group">
@@ -100,7 +93,6 @@
           </div>
         </div>
 
-        <!-- Mileage Filter -->
         <div class="filter-group">
           <h3>Mileage</h3>
           <div class="checkbox-group">
@@ -124,9 +116,7 @@
         </div>
       </aside>
 
-      <!-- Main Content -->
       <section class="cars-main">
-        <!-- Search and Sort -->
         <div class="cars-header">
           <div class="search-box">
             <input type="text" id="searchInput" placeholder="Search by brand, model, or location..."
@@ -140,34 +130,26 @@
           </select>
         </div>
 
-        <!-- Results Count -->
         <div class="results-info">
           <p>Showing <span id="resultsCount">0</span> vehicles</p>
         </div>
 
-        <!-- Cars Grid -->
         <div class="cars-grid" id="carsGrid">
-          <!-- Cars will be loaded here -->
         </div>
 
-        <!-- No Results Message -->
         <div class="no-results" id="noResults" style="display: none;">
           <p>No cars found matching your criteria. Try adjusting your filters.</p>
           <button class="btn btn-primary" onclick="resetFilters()">Reset Filters</button>
         </div>
 
-        <!-- Pagination -->
         <div class="pagination" id="pagination">
-          <!-- Pagination will be loaded here -->
         </div>
       </section>
     </div>
   </main>
 
-  <!-- Footer -->
   <div id="footer"></div>
 
-  <!-- Scripts -->
   <script src="js/utils.js"></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

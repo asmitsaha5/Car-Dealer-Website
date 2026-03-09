@@ -1,7 +1,3 @@
-// ============================================
-// DUMMY CAR DATA
-// ============================================
-
 const carsData = [
   {
     id: 1,
@@ -253,9 +249,6 @@ const carsData = [
   }
 ];
 
-// ============================================
-// BRANDS LIST
-// ============================================
 const brands = [
   "All Brands",
   "Tesla",
@@ -270,9 +263,6 @@ const brands = [
   "Porsche"
 ];
 
-// ============================================
-// FUEL TYPES
-// ============================================
 const fuelTypes = [
   "All Types",
   "Petrol",
@@ -281,9 +271,6 @@ const fuelTypes = [
   "Electric"
 ];
 
-// ============================================
-// TRANSMISSION TYPES
-// ============================================
 const transmissions = [
   "All Transmissions",
   "Manual",
@@ -291,9 +278,6 @@ const transmissions = [
   "CVT"
 ];
 
-// ============================================
-// COLORS
-// ============================================
 const colors = [
   "All Colors",
   "Black",
@@ -304,7 +288,6 @@ const colors = [
   "Gray"
 ];
 
-// Export data for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { carsData, brands, fuelTypes, transmissions, colors };
 }

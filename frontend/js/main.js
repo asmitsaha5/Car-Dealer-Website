@@ -1,10 +1,3 @@
-// ============================================
-// MAIN APPLICATION JAVASCRIPT
-// ============================================
-
-/**
- * Initialize the application
- */
 function initApp() {
   loadNavbar();
   loadFooter();
@@ -12,9 +5,6 @@ function initApp() {
   setupMobileNav();
 }
 
-/**
- * Load navbar component
- */
 async function loadNavbar() {
   const navbar = document.getElementById('navbar');
   if (navbar) {
@@ -29,9 +19,6 @@ async function loadNavbar() {
   }
 }
 
-/**
- * Load footer component
- */
 async function loadFooter() {
   const footer = document.getElementById('footer');
   if (footer) {
@@ -44,9 +31,6 @@ async function loadFooter() {
   }
 }
 
-/**
- * Setup mobile navigation toggle
- */
 function setupMobileNav() {
   const navbarToggle = document.getElementById('navbarToggle');
   const navbarMenu = document.getElementById('navbarMenu');
@@ -57,7 +41,6 @@ function setupMobileNav() {
       navbarMenu.classList.toggle('active');
     });
 
-    // Close menu when link is clicked
     const navLinks = navbarMenu.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
@@ -68,9 +51,6 @@ function setupMobileNav() {
   }
 }
 
-/**
- * Update authentication UI based on login status
- */
 function updateAuthUI() {
   const navAuth = document.getElementById('navAuth');
   const user = getStorage('currentUser', 'local');
@@ -89,9 +69,6 @@ function updateAuthUI() {
   }
 }
 
-/**
- * Logout user
- */
 function logout() {
   removeStorage('currentUser', 'local');
   removeStorage('sessionToken', 'local');
@@ -101,34 +78,20 @@ function logout() {
   }, 1000);
 }
 
-/**
- * Check if user is logged in
- * @returns {boolean} True if logged in
- */
 function isLoggedIn() {
   return !!getStorage('currentUser', 'local');
 }
 
-/**
- * Get current logged in user
- * @returns {object|null} User object or null
- */
 function getCurrentUser() {
   return getStorage('currentUser', 'local');
 }
 
-/**
- * Redirect to login if not authenticated
- */
 function requireLogin() {
   if (!isLoggedIn()) {
     window.location.href = 'login.html';
   }
 }
 
-/**
- * Add scroll animation for elements
- */
 function addScrollAnimations() {
   const observerOptions = {
     threshold: 0.1,
@@ -149,13 +112,7 @@ function addScrollAnimations() {
   });
 }
 
-/**
- * Initialize event listeners
- */
 function initEventListeners() {
-  // Add any global event listeners here
-  
-  // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
@@ -167,29 +124,19 @@ function initEventListeners() {
   });
 }
 
-/**
- * Initialize application when DOM is ready
- */
 document.addEventListener('DOMContentLoaded', () => {
   initApp();
   initEventListeners();
   addScrollAnimations();
 });
 
-/**
- * Handle window resize for responsive behavior
- */
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
-    // Add any resize-specific logic here
   }, 250);
 });
 
-/**
- * Add CSS styles for navbar auth
- */
 const style = document.createElement('style');
 style.textContent = `
   .nav-auth-user {

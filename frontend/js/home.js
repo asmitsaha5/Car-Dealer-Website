@@ -1,15 +1,7 @@
-// ============================================
-// HOME PAGE JAVASCRIPT
-// ============================================
-
-/**
- * Load featured cars on home page
- */
 function loadFeaturedCars() {
   const featuredCarsContainer = document.getElementById('featuredCars');
   if (!featuredCarsContainer) return;
 
-  // Get first 6 cars as featured
   const featuredCars = carsData.slice(0, 6);
 
   featuredCarsContainer.innerHTML = featuredCars.map(car => `
@@ -29,22 +21,16 @@ function loadFeaturedCars() {
   `).join('');
 }
 
-/**
- * Handle category card clicks
- */
 function setupCategoryCards() {
   const categoryCards = document.querySelectorAll('.category-card');
-  
+
   categoryCards.forEach(card => {
-    card.addEventListener('click', function() {
+    card.addEventListener('click', function () {
       window.location.href = 'cars.html';
     });
   });
 }
 
-/**
- * Initialize home page
- */
 document.addEventListener('DOMContentLoaded', () => {
   loadFeaturedCars();
   setTimeout(() => {
@@ -52,12 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 100);
 });
 
-// Add home-page specific styles
 const homeStyles = document.createElement('style');
 homeStyles.textContent = `
-  /* ============================================
-     HERO SECTION
-     ============================================ */
   .hero {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     padding: 100px var(--spacing-lg) 80px;
@@ -112,9 +94,6 @@ homeStyles.textContent = `
     flex-wrap: wrap;
   }
 
-  /* ============================================
-     CARS GRID
-     ============================================ */
   .cars-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -162,9 +141,6 @@ homeStyles.textContent = `
     text-align: center;
   }
 
-  /* ============================================
-     HOW IT WORKS SECTION
-     ============================================ */
   .how-it-works {
     background: linear-gradient(180deg, rgba(233, 69, 96, 0.05) 0%, transparent 100%);
   }
@@ -200,9 +176,6 @@ homeStyles.textContent = `
     font-family: var(--font-primary);
   }
 
-  /* ============================================
-     STATS SECTION
-     ============================================ */
   .stats-section {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     border-radius: var(--radius-lg);
@@ -234,9 +207,6 @@ homeStyles.textContent = `
     font-size: 1rem;
   }
 
-  /* ============================================
-     CATEGORIES SECTION
-     ============================================ */
   .categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -272,9 +242,6 @@ homeStyles.textContent = `
     color: var(--text-secondary);
   }
 
-  /* ============================================
-     CTA SECTION
-     ============================================ */
   .cta-section {
     background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
     margin-top: var(--spacing-xl);
@@ -312,9 +279,6 @@ homeStyles.textContent = `
     color: var(--text-primary);
   }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
   @media (max-width: 767px) {
     .hero-content h1 {
       font-size: 2rem;

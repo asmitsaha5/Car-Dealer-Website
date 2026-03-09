@@ -1,12 +1,3 @@
-// ============================================
-// UTILITY FUNCTIONS
-// ============================================
-
-/**
- * Load HTML component into element
- * @param {string} componentPath - Path to component HTML file
- * @param {string} elementId - ID of element to load component into
- */
 async function loadComponent(componentPath, elementId) {
   try {
     const response = await fetch(componentPath);
@@ -18,11 +9,6 @@ async function loadComponent(componentPath, elementId) {
   }
 }
 
-/**
- * Format price to Indian Rupees
- * @param {number} price - Price to format
- * @returns {string} Formatted price in INR
- */
 function formatPrice(price) {
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -32,30 +18,14 @@ function formatPrice(price) {
   }).format(price);
 }
 
-/**
- * Format mileage in kilometers with comma separators
- * @param {number} mileage - Mileage value in kilometers
- * @returns {string} Formatted mileage
- */
 function formatMileage(mileage) {
   return mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " km";
 }
 
-/**
- * Format number with commas
- * @param {number} num - Number to format
- * @returns {string} Formatted number
- */
 function formatNumber(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-/**
- * Truncate text to specific length
- * @param {string} text - Text to truncate
- * @param {number} maxLength - Maximum length
- * @returns {string} Truncated text with ellipsis
- */
 function truncateText(text, maxLength = 100) {
   if (text.length > maxLength) {
     return text.substring(0, maxLength) + '...';
@@ -63,11 +33,6 @@ function truncateText(text, maxLength = 100) {
   return text;
 }
 
-/**
- * Generate URL-friendly slug from text
- * @param {string} text - Text to slugify
- * @returns {string} Slugified text
- */
 function slugify(text) {
   return text
     .toLowerCase()
@@ -77,10 +42,6 @@ function slugify(text) {
     .replace(/^-+|-+$/g, '');
 }
 
-/**
- * Parse URL query parameters
- * @returns {object} Query parameters object
- */
 function getQueryParams() {
   const params = new URLSearchParams(window.location.search);
   const paramsObj = {};
@@ -90,62 +51,32 @@ function getQueryParams() {
   return paramsObj;
 }
 
-/**
- * Build query string from object
- * @param {object} params - Parameters object
- * @returns {string} Query string
- */
 function buildQueryString(params) {
   return Object.keys(params)
     .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
     .join('&');
 }
 
-/**
- * Redirect to URL with parameters
- * @param {string} url - Base URL
- * @param {object} params - Parameters object
- */
 function redirectWithParams(url, params) {
   const queryString = buildQueryString(params);
   window.location.href = `${url}?${queryString}`;
 }
 
-/**
- * Get single query parameter
- * @param {string} paramName - Parameter name
- * @returns {string|null} Parameter value or null
- */
 function getQueryParam(paramName) {
   const params = new URLSearchParams(window.location.search);
   return params.get(paramName);
 }
 
-/**
- * Check if string is valid email
- * @param {string} email - Email to validate
- * @returns {boolean} True if valid email
- */
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
-/**
- * Check if string is valid phone number
- * @param {string} phone - Phone to validate
- * @returns {boolean} True if valid phone
- */
 function isValidPhone(phone) {
   const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
   return phoneRegex.test(phone);
 }
 
-/**
- * Validate password strength
- * @param {string} password - Password to validate
- * @returns {object} Validation result
- */
 function validatePassword(password) {
   const result = {
     isValid: false,
@@ -167,7 +98,7 @@ function validatePassword(password) {
   }
 
   result.isValid = result.errors.length === 0;
-  
+
   if (result.isValid) {
     result.strength = 'Strong';
   } else if (password.length >= 8) {
@@ -177,12 +108,6 @@ function validatePassword(password) {
   return result;
 }
 
-/**
- * Debounce function
- * @param {function} func - Function to debounce
- * @param {number} wait - Wait time in milliseconds
- * @returns {function} Debounced function
- */
 function debounce(func, wait = 300) {
   let timeout;
   return function executedFunction(...args) {
@@ -195,15 +120,9 @@ function debounce(func, wait = 300) {
   };
 }
 
-/**
- * Throttle function
- * @param {function} func - Function to throttle
- * @param {number} limit - Time limit in milliseconds
- * @returns {function} Throttled function
- */
 function throttle(func, limit = 300) {
   let inThrottle;
-  return function(...args) {
+  return function (...args) {
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;
@@ -212,12 +131,6 @@ function throttle(func, limit = 300) {
   };
 }
 
-/**
- * Show notification message
- * @param {string} message - Message to show
- * @param {string} type - Type (success, error, info, warning)
- * @param {number} duration - Duration in milliseconds
- */
 function showNotification(message, type = 'info', duration = 3000) {
   const notificationId = `notification-${Date.now()}`;
   const notification = document.createElement('div');
@@ -236,19 +149,14 @@ function showNotification(message, type = 'info', duration = 3000) {
     z-index: 9999;
     animation: slideInRight 0.3s ease-out;
   `;
-  
+
   document.body.appendChild(notification);
-  
+
   setTimeout(() => {
     notification.remove();
   }, duration);
 }
 
-/**
- * Copy text to clipboard
- * @param {string} text - Text to copy
- * @returns {Promise<boolean>} True if successful
- */
 async function copyToClipboard(text) {
   try {
     await navigator.clipboard.writeText(text);
@@ -259,11 +167,6 @@ async function copyToClipboard(text) {
   }
 }
 
-/**
- * Get initials from name
- * @param {string} name - Full name
- * @returns {string} Initials
- */
 function getInitials(name) {
   return name
     .split(' ')
@@ -272,11 +175,6 @@ function getInitials(name) {
     .substring(0, 2);
 }
 
-/**
- * Format date to readable format
- * @param {Date|string} date - Date to format
- * @returns {string} Formatted date
- */
 function formatDate(date) {
   const dateObj = typeof date === 'string' ? new Date(date) : date;
   return new Intl.DateTimeFormat('en-US', {
@@ -286,11 +184,6 @@ function formatDate(date) {
   }).format(dateObj);
 }
 
-/**
- * Check if element is in viewport
- * @param {HTMLElement} element - Element to check
- * @returns {boolean} True if in viewport
- */
 function isInViewport(element) {
   const rect = element.getBoundingClientRect();
   return (
@@ -301,10 +194,6 @@ function isInViewport(element) {
   );
 }
 
-/**
- * Smooth scroll to element
- * @param {HTMLElement|string} target - Element or selector
- */
 function smoothScroll(target) {
   const element = typeof target === 'string' ? document.querySelector(target) : target;
   if (element) {
@@ -312,12 +201,6 @@ function smoothScroll(target) {
   }
 }
 
-/**
- * Get browser storage with error handling
- * @param {string} key - Storage key
- * @param {string} type - Storage type ('local' or 'session')
- * @returns {any} Stored value or null
- */
 function getStorage(key, type = 'local') {
   try {
     const storage = type === 'local' ? localStorage : sessionStorage;
@@ -329,12 +212,6 @@ function getStorage(key, type = 'local') {
   }
 }
 
-/**
- * Set browser storage with error handling
- * @param {string} key - Storage key
- * @param {any} value - Value to store
- * @param {string} type - Storage type ('local' or 'session')
- */
 function setStorage(key, value, type = 'local') {
   try {
     const storage = type === 'local' ? localStorage : sessionStorage;
@@ -344,11 +221,6 @@ function setStorage(key, value, type = 'local') {
   }
 }
 
-/**
- * Remove item from storage
- * @param {string} key - Storage key
- * @param {string} type - Storage type ('local' or 'session')
- */
 function removeStorage(key, type = 'local') {
   try {
     const storage = type === 'local' ? localStorage : sessionStorage;
@@ -358,10 +230,6 @@ function removeStorage(key, type = 'local') {
   }
 }
 
-/**
- * Clear all storage
- * @param {string} type - Storage type ('local' or 'session')
- */
 function clearStorage(type = 'local') {
   try {
     const storage = type === 'local' ? localStorage : sessionStorage;

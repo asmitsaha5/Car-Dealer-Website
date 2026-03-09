@@ -1,29 +1,17 @@
-// ============================================
-// PROFILE PAGE JAVASCRIPT
-// ============================================
-
-/**
- * Initialize profile page
- */
 document.addEventListener('DOMContentLoaded', () => {
   requireLogin();
   loadProfileData();
   loadUserListings();
 });
 
-/**
- * Load user profile data
- */
 function loadProfileData() {
   const user = getCurrentUser();
 
   if (user) {
-    // Update header
     document.getElementById('profileName').textContent = user.name;
     document.getElementById('profileEmail').textContent = user.email;
     document.getElementById('profileAvatar').textContent = getInitials(user.name);
 
-    // Update info section
     document.getElementById('infoName').textContent = user.name;
     document.getElementById('infoEmail').textContent = user.email;
     document.getElementById('infoPhone').textContent = user.phone || '-';
@@ -31,9 +19,6 @@ function loadProfileData() {
   }
 }
 
-/**
- * Load user's car listings
- */
 function loadUserListings() {
   const listingsContainer = document.getElementById('listingsContainer');
   const listings = getStorage('userListings', 'local') || [];
@@ -70,41 +55,25 @@ function loadUserListings() {
   `;
 }
 
-/**
- * Switch between tabs
- * @param {string} tabName - Tab name
- * @param {Event} event - Click event
- */
 function switchTab(tabName, event) {
   event.preventDefault();
 
-  // Hide all tabs
   document.querySelectorAll('.tab-content').forEach(tab => {
     tab.classList.remove('active');
   });
 
-  // Remove active class from nav items
   document.querySelectorAll('.profile-nav-item').forEach(item => {
     item.classList.remove('active');
   });
 
-  // Show selected tab
   document.getElementById(tabName).classList.add('active');
   event.target.classList.add('active');
 }
 
-/**
- * Edit listing
- * @param {number} listingId - Listing ID
- */
 function editListing(listingId) {
   showNotification('Edit functionality coming soon', 'info');
 }
 
-/**
- * Delete listing
- * @param {number} listingId - Listing ID
- */
 function deleteListing(listingId) {
   if (confirm('Are you sure you want to delete this listing?')) {
     const listings = getStorage('userListings', 'local') || [];
@@ -115,12 +84,8 @@ function deleteListing(listingId) {
   }
 }
 
-// Add profile page specific styles
 const profileStyles = document.createElement('style');
 profileStyles.textContent = `
-  /* ============================================
-     PROFILE CONTAINER
-     ============================================ */
   .profile-container {
     padding: var(--spacing-xl) 0;
   }
@@ -131,9 +96,6 @@ profileStyles.textContent = `
     gap: var(--spacing-xl);
   }
 
-  /* ============================================
-     PROFILE SIDEBAR
-     ============================================ */
   .profile-sidebar {
     height: fit-content;
     position: sticky;
@@ -169,9 +131,6 @@ profileStyles.textContent = `
     margin-bottom: var(--spacing-lg);
   }
 
-  /* ============================================
-     PROFILE NAV
-     ============================================ */
   .profile-nav {
     display: flex;
     flex-direction: column;
@@ -201,9 +160,6 @@ profileStyles.textContent = `
     color: var(--text-primary);
   }
 
-  /* ============================================
-     PROFILE MAIN
-     ============================================ */
   .profile-main {
     display: flex;
     flex-direction: column;
@@ -218,9 +174,6 @@ profileStyles.textContent = `
     display: block;
   }
 
-  /* ============================================
-     CONTENT CARD
-     ============================================ */
   .content-card h3 {
     margin-bottom: var(--spacing-lg);
     font-family: var(--font-primary);
@@ -228,9 +181,6 @@ profileStyles.textContent = `
     padding-bottom: var(--spacing-md);
   }
 
-  /* ============================================
-     INFO TABLE
-     ============================================ */
   .info-table {
     display: grid;
     gap: var(--spacing-lg);
@@ -257,9 +207,6 @@ profileStyles.textContent = `
     color: var(--text-primary);
   }
 
-  /* ============================================
-     LISTINGS
-     ============================================ */
   .empty-state {
     text-align: center;
     padding: var(--spacing-xl);
@@ -325,9 +272,6 @@ profileStyles.textContent = `
     font-size: 0.85rem;
   }
 
-  /* ============================================
-     SETTINGS
-     ============================================ */
   .settings-group {
     margin-bottom: var(--spacing-lg);
     padding-bottom: var(--spacing-lg);
@@ -359,9 +303,6 @@ profileStyles.textContent = `
     cursor: pointer;
   }
 
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
   @media (max-width: 1024px) {
     .profile-grid {
       grid-template-columns: 1fr;
